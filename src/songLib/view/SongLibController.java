@@ -15,8 +15,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import songLib.app.Song;
 
@@ -27,6 +29,13 @@ public class SongLibController {
 	@FXML TextField f;
 	@FXML TextField c;
 	@FXML ListView<Song> songlist;
+	
+	@FXML Pane details;
+	
+	@FXML Text details_title;
+	@FXML Text details_artist;
+	@FXML Text details_album;
+	@FXML Text details_year;
 	
 	private ObservableList<Song> obsList;
 	
@@ -44,6 +53,7 @@ public class SongLibController {
 		songlist.setItems(obsList);
 		
 		songlist.getSelectionModel().select(0);
+		loadSong();
 
 	      // set listener for the items
 	      songlist
@@ -51,7 +61,7 @@ public class SongLibController {
 	        .selectedIndexProperty()
 	        .addListener(
 	           (obs, oldVal, newVal) -> 
-	               showItemInputDialog(mainStage));
+	               loadSong());
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {                
@@ -65,6 +75,14 @@ public class SongLibController {
 
 	      Optional<String> result = dialog.showAndWait();
 	      if (result.isPresent()) { obsList.set(index, song); }
+	}
+	
+	private void loadSong() {
+		Song song = songlist.getSelectionModel().getSelectedItem();
+		details_title.setText(song.name);
+		details_artist.setText(song.artist);
+		details_album.setText(song.album);
+		details_year.setText(Integer.toString(song.year));
 	}
 	
 	private void fileToList(ObservableList<Song> obsList) throws IOException {
@@ -93,5 +111,19 @@ public class SongLibController {
 			writer.append("/n");
 		}
 		writer.close();
+	}
+	
+	public void deleteHandler() {
+		Song song = songlist.getSelectionModel().getSelectedItem();
+		deleteSong(song);
+	}
+	
+	public void editHandler() {
+		Song song = songlist.getSelectionModel().getSelectedItem();
+		/* TODO: Edit Code */
+	}
+	
+	private void deleteSong(Song song) {
+		obsList.remove(song);
 	}
 }

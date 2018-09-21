@@ -3,7 +3,7 @@ package songLib.app;
 public class Song {
 	
 	public String name, artist, album;
-	int year;
+	public int year;
 	
 	public Song(String name, String artist, String album, String year) {
 		this.name = name;
@@ -13,6 +13,6 @@ public class Song {
 	}
 	
 	public String toString() {
-		return name + ", " + artist + ", " + album + ", " + year;
+		return name + ", " + artist;
 	}
 }
