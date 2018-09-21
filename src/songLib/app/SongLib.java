@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import songLib.view.SongLibController;
 
 
-public class SongLibApp extends Application {
+public class SongLib extends Application {
 	@Override
 	public void start(Stage primaryStage) 
 	throws IOException {
