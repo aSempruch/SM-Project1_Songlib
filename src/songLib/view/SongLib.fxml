@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
 
-<GridPane 
-	xmlns="http://javafx.com/javafx/8.0.60" 
-	xmlns:fx="http://javafx.com/fxml/1" 
-	fx:controller="songLib.view.SongLibController"
-	hgap="10" vgap="10">
-	
-	<Text text="Fahrenheit" GridPane.valignment="BOTTOM" />
-	<Button fx:id="f2c" onAction="#convert" text="&gt;&gt;&gt;" GridPane.columnIndex="1" />
-	<Text text="Celsius" GridPane.columnIndex="2" GridPane.valignment="BOTTOM" />
-	<TextField fx:id="f" prefColumnCount="7" promptText="-40.0" GridPane.rowIndex="1" />
-	<Button fx:id="c2f" onAction="#convert" text="&lt;&lt;&lt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-	<TextField fx:id="c" prefColumnCount="7" promptText="-40.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-	<ListView fx:id="songlist" GridPane.halignment="LEFT"/>
+<GridPane hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songLib.view.SongLibController">
+	<ListView fx:id="songlist" prefHeight="400.0" prefWidth="312.0" GridPane.halignment="LEFT" />
 	
 		
 	<padding>
 		<Insets bottom="10" left="10" right="10" top="10" />
 	</padding>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
    
 </GridPane>
-
-

@@ -1,6 +1,9 @@
 package songLib.view;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +33,14 @@ public class SongLibController {
 	public void start(Stage mainStage) {
 		obsList = FXCollections.observableArrayList();
 		
+		// Add items from file to list
+		try {
+			fileToList(obsList);
+		} catch (IOException e) {
+			System.out.println("[IO Error] Unable to Open SongList file for reading");
+			e.printStackTrace();
+		}
+		
 		songlist.setItems(obsList);
 		
 		songlist.getSelectionModel().select(0);
@@ -41,19 +52,6 @@ public class SongLibController {
 	        .addListener(
 	           (obs, oldVal, newVal) -> 
 	               showItemInputDialog(mainStage));
-	}
-
-	public void convert(ActionEvent e) {
-		Button b = (Button)e.getSource();
-		if (b == f2c) {
-			float fval = Float.valueOf(f.getText());
-			float cval = (fval-32)*5/9;
-			c.setText(String.format("%5.1f", cval));
-		} else {
-			float cval = Float.valueOf(c.getText());
-			float fval = cval*9/5+32;
-			f.setText(String.format("%5.1f", fval));
-		}
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {                
@@ -69,8 +67,27 @@ public class SongLibController {
 	      if (result.isPresent()) { obsList.set(index, song); }
 	}
 	
+	private void fileToList(ObservableList<Song> obsList) throws IOException {
+		BufferedReader reader = new BufferedReader(
+			new FileReader(
+				getClass().getResource("/SongList.txt").getFile()
+			)
+		);
+		
+		String line;
+		while((line = reader.readLine()) != null) {
+			String[] s = line.split(",");
+			obsList.add(
+				new Song(s[0],s[1],s[2],s[3])
+			);
+		}
+		reader.close();
+	}
+	
 	public void listToFile(ObservableList<Song> obsList) throws IOException { 
-		BufferedWriter writer = new BufferedWriter(new FileWriter("SongSave.txt", true));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(
+			getClass().getResource("/SongList.txt").getFile(), true
+		));
 		for(Song song: obsList) {
 			writer.append(song.toString());
 			writer.append("/n");
