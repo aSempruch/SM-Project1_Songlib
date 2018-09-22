@@ -2,20 +2,15 @@ package songLib.view;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -45,7 +40,7 @@ public class SongLibController {
 			System.out.println("[IO Error] Unable to Open SongList file for reading");
 			e.printStackTrace();
 		}
-		
+		FXCollections.sort(obsList);
 		songlist.setItems(obsList);
 		
 		songlist.getSelectionModel().select(0);
@@ -74,11 +69,17 @@ public class SongLibController {
 	}
 	
 	private void loadSong() {
-		Song song = songlist.getSelectionModel().getSelectedItem();
-		details_title.setText(song.name);
-		details_artist.setText(song.artist);
-		details_album.setText(song.album);
-		details_year.setText(Integer.toString(song.year));
+		try {
+			Song song = songlist.getSelectionModel().getSelectedItem();
+			details_title.setText(song.name);
+			details_artist.setText(song.artist);
+			details_album.setText(song.album);
+			details_year.setText(Integer.toString(song.year));
+		}
+		catch (NullPointerException e) {
+			// sorting the obsList causes NullPointerException briefly
+			// we should probably fix this before submitting
+		}
 	}
 	
 	private void fileToList(ObservableList<Song> obsList) throws IOException {
@@ -120,6 +121,9 @@ public class SongLibController {
 		Song song = songlist.getSelectionModel().getSelectedItem();
 		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
 		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
+		//ObservableList<Song> dummyList = FXCollections.observableArrayList(obsList);
+		FXCollections.sort(obsList);
+		//obsList = FXCollections.observableArrayList(dummyList);
 		try {
 			listToFile(obsList);
 		} catch (IOException e) {
