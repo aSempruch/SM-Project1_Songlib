@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -130,8 +132,21 @@ public class SongLibController {
 	}
 	
 	public void editHandler() {
+		
+		// Check if title or artist is empty
+		if(details_title.getText().length() == 0 || details_artist.getText().length() == 0) {
+			showError("Error Editing Song", "Song title and artist are required");
+			return;
+		}
+		
 		Song song = songlist.getSelectionModel().getSelectedItem();
 		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
+		
+		if(isDuplicate(song)) {
+			showError("Error Editing Song", "A song with this title and artist already exists.");
+			return;
+		}
+		
 		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
 		update_button.setVisible(false);
 		//ObservableList<Song> dummyList = FXCollections.observableArrayList(obsList);
@@ -161,12 +176,15 @@ public class SongLibController {
 			addSong(newSong);
 		}
 		else {
-			// TODO: Show error dialog that title and artist are required
+			showError("Error Adding Song", "Song title and artist are required");
 		}
 	}
 	
 	private void addSong(Song song) {
-		// TODO: Check if song title & artist conflict
+		if(isDuplicate(song)) {
+			showError("Error Adding Song", "A song with this title and artist already exists.");
+			return;
+		}
 		
 		obsList.add(song);
 		sortList(obsList);
@@ -197,5 +215,22 @@ public class SongLibController {
 	
 	private void sortList(ObservableList<Song> obsList) {
 		FXCollections.sort(obsList);
+	}
+	
+	private void showError(String title, String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(title);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
+	
+	private boolean isDuplicate(Song newSong) {
+		for (Song song : obsList) {
+			if(song.getName().equals(newSong.getName()) && song.getArtist().equals(newSong.getArtist()))
+				return true;
+		}
+		
+		return false;
 	}
 }
