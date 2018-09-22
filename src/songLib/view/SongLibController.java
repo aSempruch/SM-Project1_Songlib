@@ -195,6 +195,8 @@ public class SongLibController {
 			System.out.println("[IO Error] Unable to update SongList file");
 			e.printStackTrace();
 		}
+		songlist.getSelectionModel().select(song);
+		loadSong();
 		
 		// Clear Input Fields
 		add_title.clear();
