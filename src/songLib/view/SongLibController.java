@@ -24,18 +24,14 @@ import songLib.app.Song;
 
 public class SongLibController {
 	
-	@FXML Button f2c;
-	@FXML Button c2f;
-	@FXML TextField f;
-	@FXML TextField c;
 	@FXML ListView<Song> songlist;
 	
 	@FXML Pane details;
 	
-	@FXML Text details_title;
-	@FXML Text details_artist;
-	@FXML Text details_album;
-	@FXML Text details_year;
+	@FXML TextField details_title;
+	@FXML TextField details_artist;
+	@FXML TextField details_album;
+	@FXML TextField details_year;
 	
 	private ObservableList<Song> obsList;
 	
@@ -120,7 +116,8 @@ public class SongLibController {
 	
 	public void editHandler() {
 		Song song = songlist.getSelectionModel().getSelectedItem();
-		/* TODO: Edit Code */
+		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
+		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
 	}
 	
 	private void deleteSong(Song song) {
