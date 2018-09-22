@@ -139,6 +139,14 @@ public class SongLibController {
 			return;
 		}
 		
+		try {
+			if(details_year.getText().length() > 0)
+				Integer.parseInt(details_year.getText());
+		} catch (NumberFormatException e) {
+			showError("Error Editing Song", "The year must be a number");
+			return;
+		}
+		
 		Song song = songlist.getSelectionModel().getSelectedItem();
 		Song newSong = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
 		
@@ -170,6 +178,15 @@ public class SongLibController {
 				artist = add_artist.getText(),
 				album = add_album.getText(),
 				year = add_year.getText();
+		
+		try {
+			if(year.length() > 0)
+				Integer.parseInt(year);
+		} catch (NumberFormatException e) {
+			showError("Error Adding Song", "The year must be a number");
+			return;
+		}
+		
 		
 		if(title.length() > 0 && artist.length() > 0) {
 			Song newSong = new Song(title, artist, album, year);

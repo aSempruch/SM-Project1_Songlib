@@ -13,29 +13,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="10" prefHeight="420.0" prefWidth="451.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songLib.view.SongLibController">
+<GridPane hgap="10" prefHeight="420.0" prefWidth="497.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songLib.view.SongLibController">
    <SplitPane dividerPositions="0.5799522673031027" prefHeight="400.0" prefWidth="589.0">
      <items>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="245.0">
             <children>
-            	<ListView fx:id="songlist" layoutY="-1.0" prefHeight="400.0" prefWidth="240.0" />
+            	<ListView fx:id="songlist" layoutY="-1.0" prefHeight="344.0" prefWidth="267.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             </children>
          </AnchorPane>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="314.0">
             <children>
-               <Pane fx:id="details" prefHeight="398.0" prefWidth="173.0">
+               <Pane fx:id="details" prefHeight="398.0" prefWidth="192.0" AnchorPane.bottomAnchor="-56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
                      <Text layoutX="2.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="44.136715300381184" />
                      <Text layoutX="2.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist:" wrappingWidth="36.10937416553497" />
                      <Text layoutX="2.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album:" wrappingWidth="44.13671875" />
                      <Text layoutX="2.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:" wrappingWidth="44.13671875" />
-                     <TextField fx:id="details_title" layoutX="50.0" layoutY="22.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_artist" layoutX="50.0" layoutY="47.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_album" layoutX="50.0" layoutY="72.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_year" layoutX="50.0" layoutY="97.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
-                     <Button layoutX="2.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
-                     <Button fx:id="update_button" layoutX="116.0" layoutY="131.0" mnemonicParsing="false" onAction="#editHandler" text="Update" visible="false" />
-                     <Text layoutX="56.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" wrappingWidth="60.136715300381184">
+                     <TextField fx:id="details_title" layoutX="50.0" layoutY="22.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="137.0" />
+                     <TextField fx:id="details_artist" layoutX="50.0" layoutY="47.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="137.0" />
+                     <TextField fx:id="details_album" layoutX="50.0" layoutY="72.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="137.0" />
+                     <TextField fx:id="details_year" layoutX="50.0" layoutY="97.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="137.0" />
+                     <Button layoutX="133.0" layoutY="312.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+                     <Button fx:id="update_button" layoutX="131.0" layoutY="127.0" mnemonicParsing="false" onAction="#editHandler" text="Update" visible="false" />
+                     <Text layoutX="75.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" wrappingWidth="60.136715300381184">
                         <font>
                            <Font size="13.0" />
                         </font>
@@ -53,7 +53,7 @@
          <TextField fx:id="add_album" layoutX="202.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" promptText="Album" />
          <TextField fx:id="add_year" layoutX="302.0" layoutY="20.0" prefHeight="25.0" prefWidth="50.0" promptText="Year" />
          <Text layoutX="5.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Song" />
-         <Button layoutX="383.0" layoutY="20.0" mnemonicParsing="false" onAction="#addHandler" text="Add" />
+         <Button layoutX="429.0" layoutY="20.0" mnemonicParsing="false" onAction="#addHandler" text="Add" />
       </children>
    </Pane>
 	
