@@ -140,14 +140,14 @@ public class SongLibController {
 		}
 		
 		Song song = songlist.getSelectionModel().getSelectedItem();
-		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
+		Song newSong = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
 		
-		if(isDuplicate(song)) {
+		if(isDuplicate(newSong) && !(newSong.getName().equals(song.getName()) && newSong.getArtist().equals(song.getArtist()))) {
 			showError("Error Editing Song", "A song with this title and artist already exists.");
 			return;
 		}
 		
-		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
+		obsList.set(songlist.getSelectionModel().getSelectedIndex(),newSong);
 		update_button.setVisible(false);
 		//ObservableList<Song> dummyList = FXCollections.observableArrayList(obsList);
 		sortList(obsList);
