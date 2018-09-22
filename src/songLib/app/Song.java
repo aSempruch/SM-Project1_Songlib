@@ -15,4 +15,9 @@ public class Song {
 	public String toString() {
 		return name + ", " + artist;
 	}
+	
+	public String toStringFull() {
+		//used for file writing
+		return name + "," + artist + "," + album + "," + year;
+	}
 }

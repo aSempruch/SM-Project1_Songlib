@@ -88,6 +88,7 @@ public class SongLibController {
 			)
 		);
 		
+		System.out.println(getClass().getResource("/SongList.txt").getPath());
 		String line;
 		while((line = reader.readLine()) != null) {
 			String[] s = line.split(",");
@@ -100,11 +101,12 @@ public class SongLibController {
 	
 	public void listToFile(ObservableList<Song> obsList) throws IOException { 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
-			getClass().getResource("/SongList.txt").getFile(), true
+			getClass().getResource("/SongList.txt").getFile(), false
 		));
+		
 		for(Song song: obsList) {
-			writer.append(song.toString());
-			writer.append("/n");
+			writer.append(song.toStringFull());
+			writer.newLine();
 		}
 		writer.close();
 	}
@@ -118,9 +120,21 @@ public class SongLibController {
 		Song song = songlist.getSelectionModel().getSelectedItem();
 		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
 		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
+		try {
+			listToFile(obsList);
+		} catch (IOException e) {
+			System.out.println("[IO Error] Unable to Open SongList file for reading");
+			e.printStackTrace();
+		}
 	}
 	
 	private void deleteSong(Song song) {
 		obsList.remove(song);
+		try {
+			listToFile(obsList);
+		} catch (IOException e) {
+			System.out.println("[IO Error] Unable to Open SongList file for reading");
+			e.printStackTrace();
+		}
 	}
 }
