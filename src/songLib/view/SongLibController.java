@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -28,6 +29,13 @@ public class SongLibController {
 	@FXML TextField details_album;
 	@FXML TextField details_year;
 	
+	@FXML TextField add_title;
+	@FXML TextField add_artist;
+	@FXML TextField add_album;
+	@FXML TextField add_year;
+	
+	@FXML Button update_button;
+	
 	private ObservableList<Song> obsList;
 	
 	public void start(Stage mainStage) {
@@ -40,7 +48,7 @@ public class SongLibController {
 			System.out.println("[IO Error] Unable to Open SongList file for reading");
 			e.printStackTrace();
 		}
-		FXCollections.sort(obsList);
+		sortList(obsList);
 		songlist.setItems(obsList);
 		
 		songlist.getSelectionModel().select(0);
@@ -69,12 +77,16 @@ public class SongLibController {
 	}
 	
 	private void loadSong() {
+		update_button.setVisible(false);
 		try {
 			Song song = songlist.getSelectionModel().getSelectedItem();
 			details_title.setText(song.name);
 			details_artist.setText(song.artist);
 			details_album.setText(song.album);
-			details_year.setText(Integer.toString(song.year));
+			if(song.year != 0)
+				details_year.setText(Integer.toString(song.year));
+			else
+				details_year.setText("");
 		}
 		catch (NullPointerException e) {
 			// sorting the obsList causes NullPointerException briefly
@@ -121,8 +133,9 @@ public class SongLibController {
 		Song song = songlist.getSelectionModel().getSelectedItem();
 		song = new Song(details_title.getText(), details_artist.getText(), details_album.getText(), details_year.getText());
 		obsList.set(songlist.getSelectionModel().getSelectedIndex(),song);
+		update_button.setVisible(false);
 		//ObservableList<Song> dummyList = FXCollections.observableArrayList(obsList);
-		FXCollections.sort(obsList);
+		sortList(obsList);
 		//obsList = FXCollections.observableArrayList(dummyList);
 		try {
 			listToFile(obsList);
@@ -130,6 +143,46 @@ public class SongLibController {
 			System.out.println("[IO Error] Unable to Open SongList file for reading");
 			e.printStackTrace();
 		}
+	}
+	
+	// Make update button visible
+	public void updateClickHandler() {
+		update_button.setVisible(true);
+	}
+	
+	public void addHandler() {
+		String  title = add_title.getText(),
+				artist = add_artist.getText(),
+				album = add_album.getText(),
+				year = add_year.getText();
+		
+		if(title.length() > 0 && artist.length() > 0) {
+			Song newSong = new Song(title, artist, album, year);
+			addSong(newSong);
+		}
+		else {
+			// TODO: Show error dialog that title and artist are required
+		}
+	}
+	
+	private void addSong(Song song) {
+		// TODO: Check if song title & artist conflict
+		
+		obsList.add(song);
+		sortList(obsList);
+		try {
+			listToFile(obsList);
+		}
+		catch(IOException e) {
+			System.out.println("[IO Error] Unable to update SongList file");
+			e.printStackTrace();
+		}
+		
+		// Clear Input Fields
+		add_title.clear();
+		add_artist.clear();
+		add_album.clear();
+		add_year.clear();
 	}
 	
 	private void deleteSong(Song song) {
@@ -140,5 +193,9 @@ public class SongLibController {
 			System.out.println("[IO Error] Unable to Open SongList file for reading");
 			e.printStackTrace();
 		}
+	}
+	
+	private void sortList(ObservableList<Song> obsList) {
+		FXCollections.sort(obsList);
 	}
 }

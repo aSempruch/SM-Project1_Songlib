@@ -9,7 +9,10 @@ public class Song implements Comparable<Song>{
 		this.name = name;
 		this.artist = artist;
 		this.album = album;
-		this.year = Integer.parseInt(year);
+		if(year.length() == 0)
+			this.year = 0;
+		else
+			this.year = Integer.parseInt(year);
 	}
 	
 	public String toString() {

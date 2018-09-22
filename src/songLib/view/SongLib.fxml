@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <GridPane hgap="10" prefHeight="420.0" prefWidth="451.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songLib.view.SongLibController">
@@ -24,22 +25,37 @@
             <children>
                <Pane fx:id="details" prefHeight="398.0" prefWidth="173.0">
                   <children>
-                     <Text layoutX="1.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="44.136715300381184" />
-                     <Text layoutX="1.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist:" wrappingWidth="36.10937416553497" />
-                     <Text layoutX="1.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album:" wrappingWidth="44.13671875" />
-                     <Text layoutX="1.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:" wrappingWidth="44.13671875" />
-                     <TextField fx:id="details_title" layoutX="49.0" layoutY="2.0" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_artist" layoutX="49.0" layoutY="27.0" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_album" layoutX="49.0" layoutY="52.0" prefHeight="25.0" prefWidth="121.0" />
-                     <TextField fx:id="details_year" layoutX="49.0" layoutY="77.0" prefHeight="25.0" prefWidth="121.0" />
-                     <Button layoutX="55.0" layoutY="359.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
-                     <Button layoutX="10.0" layoutY="359.0" mnemonicParsing="false" onAction="#editHandler" text="Edit" />
+                     <Text layoutX="2.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="44.136715300381184" />
+                     <Text layoutX="2.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist:" wrappingWidth="36.10937416553497" />
+                     <Text layoutX="2.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album:" wrappingWidth="44.13671875" />
+                     <Text layoutX="2.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:" wrappingWidth="44.13671875" />
+                     <TextField fx:id="details_title" layoutX="50.0" layoutY="22.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
+                     <TextField fx:id="details_artist" layoutX="50.0" layoutY="47.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
+                     <TextField fx:id="details_album" layoutX="50.0" layoutY="72.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
+                     <TextField fx:id="details_year" layoutX="50.0" layoutY="97.0" onKeyTyped="#updateClickHandler" prefHeight="25.0" prefWidth="121.0" />
+                     <Button layoutX="2.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+                     <Button fx:id="update_button" layoutX="116.0" layoutY="131.0" mnemonicParsing="false" onAction="#editHandler" text="Update" visible="false" />
+                     <Text layoutX="56.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details" wrappingWidth="60.136715300381184">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                     </Text>
                   </children>
                </Pane>
             </children>
          </AnchorPane>
      </items>
    </SplitPane>
+   <Pane prefHeight="101.0" prefWidth="421.0" GridPane.rowIndex="1">
+      <children>
+         <TextField fx:id="add_title" layoutX="2.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" promptText="Title" />
+         <TextField fx:id="add_artist" layoutX="102.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" promptText="Artist" />
+         <TextField fx:id="add_album" layoutX="202.0" layoutY="20.0" prefHeight="25.0" prefWidth="100.0" promptText="Album" />
+         <TextField fx:id="add_year" layoutX="302.0" layoutY="20.0" prefHeight="25.0" prefWidth="50.0" promptText="Year" />
+         <Text layoutX="5.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Song" />
+         <Button layoutX="383.0" layoutY="20.0" mnemonicParsing="false" onAction="#addHandler" text="Add" />
+      </children>
+   </Pane>
 	
 		
 	<padding>
@@ -50,6 +66,7 @@
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints />
       <RowConstraints />
    </rowConstraints>
    
