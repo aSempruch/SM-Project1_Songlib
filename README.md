@@ -2,3 +2,7 @@
 CS213 - Software Methodology Project 1 - Songlib
 
 Design and implement an application with a graphical user interface to manage a library of songs.
+
+Write Names on Files
+FXML dynamic resizing (not super needed)
+

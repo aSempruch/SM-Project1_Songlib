@@ -128,7 +128,21 @@ public class SongLibController {
 	
 	public void deleteHandler() {
 		Song song = songlist.getSelectionModel().getSelectedItem();
+		int selector = songlist.getSelectionModel().getSelectedIndex();
 		deleteSong(song);
+		if(obsList.isEmpty()) {
+			// if list is empty, then clear selection and empty fields
+			songlist.getSelectionModel().clearSelection();
+			details_title.setText("");
+			details_artist.setText("");
+			details_album.setText("");
+			details_year.setText("");
+		}
+		else if(obsList.size() > selector) {
+			// if there is song below the deleted, select that one
+			songlist.getSelectionModel().selectNext();
+		}
+		// otherwise just select the song previous to the deleted
 	}
 	
 	public void editHandler() {
