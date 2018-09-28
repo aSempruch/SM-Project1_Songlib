@@ -20,6 +20,15 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import songLib.app.Song;
 
+/**
+ * @authors
+ * Alan Sempruch
+ * NetID: as2322
+ *
+ * Andrew Li
+ * NetID: al958
+ *
+ */
 public class SongLibController {
 	
 	@FXML ListView<Song> songlist;

@@ -10,6 +10,15 @@ import javafx.stage.Stage;
 import songLib.view.SongLibController;
 
 
+/**
+ * @authors
+ * Alan Sempruch
+ * NetID: as2322
+ *
+ * Andrew Li
+ * NetID: al958
+ *
+ */
 public class SongLib extends Application {
 	@Override
 	public void start(Stage primaryStage) 

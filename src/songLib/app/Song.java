@@ -1,5 +1,14 @@
 package songLib.app;
 
+/**
+ * @authors
+ * Alan Sempruch
+ * NetID: as2322
+ *
+ * Andrew Li
+ * NetID: al958
+ *
+ */
 public class Song implements Comparable<Song>{
 	
 	public String name, artist, album;
