@@ -74,19 +74,6 @@ public class SongLibController {
 	               loadSong());
 	}
 	
-	private void showItemInputDialog(Stage mainStage) {                
-	      Song song = songlist.getSelectionModel().getSelectedItem();
-	      int index = songlist.getSelectionModel().getSelectedIndex();
-
-	      TextInputDialog dialog = new TextInputDialog(song.toString());
-	      dialog.initOwner(mainStage); dialog.setTitle("List Item");
-	      dialog.setHeaderText("Selected Item (Index: " + index + ")");
-	      dialog.setContentText("Enter name: ");
-
-	      Optional<String> result = dialog.showAndWait();
-	      if (result.isPresent()) { obsList.set(index, song); }
-	}
-	
 	private void loadSong() {
 		update_button.setVisible(false);
 		try {
@@ -150,6 +137,7 @@ public class SongLibController {
 		else if(obsList.size() > selector) {
 			// if there is song below the deleted, select that one
 			songlist.getSelectionModel().selectNext();
+			loadSong();
 		}
 		// otherwise just select the song previous to the deleted
 	}
