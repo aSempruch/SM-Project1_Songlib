@@ -193,7 +193,8 @@ public class SongLibController {
 	
 	// Make update button visible
 	public void updateClickHandler() {
-		update_button.setVisible(true);
+		if(obsList.size() > 0)
+			update_button.setVisible(true);
 	}
 	
 	public void addHandler() {
