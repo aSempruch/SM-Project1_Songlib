@@ -2,10 +2,10 @@ package songLib.view;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import songLib.app.Song;
@@ -51,6 +50,13 @@ public class SongLibController {
 	
 	public void start(Stage mainStage) {
 		obsList = FXCollections.observableArrayList();
+		
+		File newFile = new File("bin/SongList.txt");
+		try {
+			newFile.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
 		// Add items from file to list
 		try {
@@ -143,6 +149,12 @@ public class SongLibController {
 	}
 	
 	public void editHandler() {
+		
+		if(obsList.size() == 0) {
+			showError("Error Editing Song", "Cannot edit song if list is empty");
+			return;	
+		}
+		
 		
 		// Check if title or artist is empty
 		if(details_title.getText().length() == 0 || details_artist.getText().length() == 0) {

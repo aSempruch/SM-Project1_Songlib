@@ -9,3 +9,7 @@ Design and implement an application with a graphical user interface to manage a 
 
 ## Issues
 - ~~When 2 songs remain, if you delete one, the details are not loaded for the last remaining song. They stay as the song that was just deleted~~
+
+- ~~If the list is empty, then editing the fields and pressing update causes an error~~
+
+- ~~If SongList.txt does not exist, program will not open~~
